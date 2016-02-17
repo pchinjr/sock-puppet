@@ -1,0 +1,30 @@
+{
+  "name": "sock-puppet",
+  "version": "0.0.0",
+  "description": "Controlling Nodebots with SocketIO",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "johnny-five": "^0.9.21",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pchinjr/sock-puppet.git"
+  },
+  "keywords": [
+    "nodebot",
+    "socketio"
+  ],
+  "author": "Paul Chin Jr.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pchinjr/sock-puppet/issues"
+  },
+  "homepage": "https://github.com/pchinjr/sock-puppet#readme"
+}
