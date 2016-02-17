@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+    #stream {
+      width: 300px;
+      height: 300px;
+      border: 1px solid;
+    }
+  </style>
   <title>Hello Sock Puppet</title>
 </head>
 <body>
@@ -53,11 +60,7 @@
     });
     
     socket.on('push', function(data){
-      if(data > 700) {
-        $('#stream').html('awake');
-      } else {
-        $('#stream').html('asleep');
-      }
+      $('#stream').css({"background-color": "rgb(" + data + "," + 0 + "," + 0 + ")"});
     });
  
 </script>

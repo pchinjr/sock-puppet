@@ -29,7 +29,7 @@ board.on("ready", function() {
     });
     photoresistor = new five.Sensor({
       pin:'A0',
-      freq: 1000
+      freq: 25
     });
     console.log('Arduino connected');
 });
@@ -67,8 +67,8 @@ io.on('connection', function (socket) {
             console.log('SERVO STOP RECEIVED');
         });
         
-        photoresistor.on('data', function() {
-          socket.emit('push', this.value);
+        photoresistor.scale(0,255).on('data', function() {
+          socket.emit('push', Math.round(this.value));
         });
         
         socket.on('disconnect', function() {
