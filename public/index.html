@@ -6,24 +6,29 @@
   <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
   <style>
     #stream {
-      width: 300px;
-      height: 300px;
+      width: 440px;
+      height: 615px;
       border: 1px solid;
+      background-image: url(./images/nickcagemask.png);
     }
   </style>
   <title>Hello Sock Puppet</title>
 </head>
 <body>
   <div class="container">
-    <div class="row">
-      <h1>Welcome to Sock Puppet</h1>
-      
+    <div class="jumbotron text-center">
+      <h2>Welcome to Sock Puppet</h2>
+    </div>
+    <div class="row text-center">
       <button class="btn btn-primary" id="ledBlink">Speak!</button>
       <button class="btn btn-primary" id="ledStop">Sssshhhh...</button>
       <button class="btn btn-primary" id="servoSweep">Wag your sero</button>
       <button class="btn btn-primary" id="servoStop">Stay..</button>
     </div>
-    <div id="stream"></div>
+    <div class="row text-center">
+      <div id="stream"></div>
+    </div>
+    
   </div>
   
   
