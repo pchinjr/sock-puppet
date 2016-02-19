@@ -18,15 +18,21 @@
   <div class="container">
     <div class="jumbotron text-center">
       <h2>Welcome to Sock Puppet</h2>
+      <p>ONE TRUE CAGE</p>
     </div>
-    <div class="row text-center">
-      <button class="btn btn-primary" id="ledBlink">Speak!</button>
-      <button class="btn btn-primary" id="ledStop">Sssshhhh...</button>
-      <button class="btn btn-primary" id="servoSweep">Wag your sero</button>
-      <button class="btn btn-primary" id="servoStop">Stay..</button>
+    
+    <div id="stream" class="col-xs-4"></div>
+    
+    <div class="col-xs-4">
+      <div id="wag"></div>
+      <button class="btn btn-success" id="servoSweep">Wag your servo</button>
+      <button class="btn btn-danger" id="servoStop">Stay..</button>
     </div>
-    <div class="row text-center">
-      <div id="stream"></div>
+    
+    <div class="col-xs-4">
+      <div id="speak"></div>
+      <button class="btn btn-success" id="ledBlink">Speak!</button>
+      <button class="btn btn-danger" id="ledStop">Sssshhhh...</button>
     </div>
     
   </div>
@@ -38,34 +44,51 @@
   <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
  
 <script type="text/javascript">
-
+    var alive = false;
     var socket = io.connect('/');
+    
+    
     socket.on('connect', function(data) {
       socket.emit('join');
+    });
+    
+    socket.on('push', function(data){
+      $('#stream').css({"background-color": "rgb(" + data + "," + 0 + "," + 0 + ")"});
+      if(data > 100) {
+        alive = true;
+        $(':button').attr('disabled', false)
+        } else {
+          alive = false;
+          $(':button').attr('disabled', true);
+          socket.emit('led:off');
+          socket.emit('servo:stop');
+          $('#speak').html('');
+          $('#wag').html('');
+        };
     });
     
     $('#ledBlink').on('click', function(){
       console.log('start led blink');
       socket.emit('led:blink');
+      $('#speak').html('<img src="./images/nicspeak.gif">');
     });
     
     $('#ledStop').on('click', function(){
       console.log('stop led blink');
       socket.emit('led:off');
+      $('#speak').html('');
     });
     
     $('#servoSweep').on('click', function(){
       console.log('start servo sweep');
       socket.emit('servo:sweep');
+      $('#wag').html('<img src="./images/nicwag.gif">')
     });
     
     $('#servoStop').on('click', function(){
       console.log('stop servo sweep');
       socket.emit('servo:stop');
-    });
-    
-    socket.on('push', function(data){
-      $('#stream').css({"background-color": "rgb(" + data + "," + 0 + "," + 0 + ")"});
+      $('#wag').html('');
     });
  
 </script>
