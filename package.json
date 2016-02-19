@@ -4,6 +4,7 @@
   "description": "Controlling Nodebots with SocketIO",
   "main": "server.js",
   "dependencies": {
+    "bower": "^1.7.7",
     "express": "^4.13.4",
     "johnny-five": "^0.9.21",
     "socket.io": "^1.4.5"
@@ -11,7 +12,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
