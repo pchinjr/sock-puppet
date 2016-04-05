@@ -6,54 +6,63 @@
   <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
   <style>
     #stream {
-      width: 440px;
-      height: 615px;
-      border: 1px solid;
+      width: 230px;
+      height: 320px;
       background-image: url(./images/nickcagemask.png);
+      background-size: contain;
+    }
+    body {
+      background-color: black;
+    }
+    .page-header {
+      color: red;
     }
   </style>
-  <title>Hello Sock Puppet</title>
+  <title>Worship The One True Cage</title>
 </head>
 <body>
-  <div class="container">
-    <div class="jumbotron text-center">
-      <h2>Welcome to Sock Puppet</h2>
-      <p>ONE TRUE CAGE</p>
+    <div class="page-header text-center">
+      <h1>Worship The One True Cage</h1>
     </div>
-    
-    <div id="stream" class="col-xs-4"></div>
-    
-    <div class="col-xs-4">
-      <div id="wag"></div>
-      <button class="btn btn-success" id="servoSweep">Wag your servo</button>
-      <button class="btn btn-danger" id="servoStop">Stay..</button>
-    </div>
-    
-    <div class="col-xs-4">
-      <div id="speak"></div>
-      <button class="btn btn-success" id="ledBlink">Speak!</button>
-      <button class="btn btn-danger" id="ledStop">Sssshhhh...</button>
-    </div>
+    <div class="container">
+
+
+        <div id="stream" class="col-xs-4"></div>
+
+
+
+        <div class="col-xs-4">
+          <div id="wag"></div>
+          <button class="btn btn-success" id="servoSweep">Wag your servo</button>
+          <button class="btn btn-danger" id="servoStop">Stay..</button>
+        </div>
+
+
+        <div class="col-xs-4">
+          <div id="speak"></div>
+          <button class="btn btn-success" id="ledBlink">Speak!</button>
+          <button class="btn btn-danger" id="ledStop">Sssshhhh...</button>
+        </div>
     
   </div>
-  
-  
-  
+
+
+
   <script src="./bower_components/socket.io-client/socket.io.js"></script>
   <script src="./bower_components/jquery/dist/jquery.min.js"></script>
   <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
- 
+
 <script type="text/javascript">
     var alive = false;
     var socket = io.connect('/');
-    
-    
+
+
     socket.on('connect', function(data) {
       socket.emit('join');
     });
-    
+
     socket.on('push', function(data){
-      $('#stream').css({"background-color": "rgb(" + data + "," + 0 + "," + 0 + ")"});
+      $('#stream').css({"background-color": "rgb(" + data + "," + 0 + "," + 0 + ")" });
       if(data > 100) {
         alive = true;
         $(':button').attr('disabled', false)
@@ -66,32 +75,31 @@
           $('#wag').html('');
         };
     });
-    
+
     $('#ledBlink').on('click', function(){
       console.log('start led blink');
       socket.emit('led:blink');
       $('#speak').html('<img src="./images/nicspeak.gif">');
     });
-    
+
     $('#ledStop').on('click', function(){
       console.log('stop led blink');
       socket.emit('led:off');
       $('#speak').html('');
     });
-    
+
     $('#servoSweep').on('click', function(){
       console.log('start servo sweep');
       socket.emit('servo:sweep');
       $('#wag').html('<img src="./images/nicwag.gif">')
     });
-    
+
     $('#servoStop').on('click', function(){
       console.log('stop servo sweep');
       socket.emit('servo:stop');
       $('#wag').html('');
     });
- 
+
 </script>
 </body>
 </html>
- 
