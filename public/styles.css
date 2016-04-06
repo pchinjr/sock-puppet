@@ -1,0 +1,12 @@
+#stream {
+  width: 230px;
+  height: 320px;
+  background-image: url(./images/nickcagemask.png);
+  background-size: contain;
+  margin: 0 auto;
+}
+body {
+  background-color: black;
+}
+.page-header {
+  color: red;

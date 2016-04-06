@@ -1,30 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <style>
-    #stream {
-      width: 230px;
-      height: 320px;
-      background-image: url(./images/nickcagemask.png);
-      background-size: contain;
-    }
-    body {
-      background-color: black;
-    }
-    .page-header {
-      color: red;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <title>Worship The One True Cage</title>
 </head>
 <body>
     <div class="page-header text-center">
       <h1>Worship The One True Cage</h1>
     </div>
-    <div class="container">
 
 
         <div id="stream" class="col-xs-4"></div>
@@ -32,19 +17,20 @@
 
 
         <div class="col-xs-4">
-          <div id="wag"></div>
+          <div id="wag" class="thumbnail"> Hail to Cage </div>
           <button class="btn btn-success" id="servoSweep">Wag your servo</button>
           <button class="btn btn-danger" id="servoStop">Stay..</button>
         </div>
 
 
+
         <div class="col-xs-4">
-          <div id="speak"></div>
+          <div id="speak" class="thumbnail">Set Votives</div>
           <button class="btn btn-success" id="ledBlink">Speak!</button>
           <button class="btn btn-danger" id="ledStop">Sssshhhh...</button>
         </div>
-    
-  </div>
+
+
 
 
 
