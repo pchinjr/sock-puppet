@@ -1,12 +1,29 @@
-#stream {
-  width: 230px;
-  height: 320px;
-  background-image: url(./images/nickcagemask.png);
-  background-size: contain;
-  margin: 0 auto;
-}
 body {
-  background-color: black;
+    background-image: url("./images/clouds.jpg");
+    background-size: cover;
+    padding-top: 30px;
 }
+
+#stream img
+{
+    max-width:100%; 
+    max-height:100%;
+    margin:auto;
+    display:block;
+/*    background: radial-gradient(ellipse at center, rgba(255,221,50,1) 30%,rgba(125,185,232,0) 70%); */
+}
+
+h1 { 
+    font-family: 'Kaushan Script', cursive;
+    font-size: 48px;
+}
+
 .page-header {
-  color: red;
+    border-bottom: none;
+    padding-bottom: 50px;
+}
+
+.page-header h1 { 
+    font-family: 'Kaushan Script', cursive;
+    font-size: 48px !important;
+}

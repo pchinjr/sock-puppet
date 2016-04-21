@@ -1,91 +1,165 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <title>Worship The One True Cage</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Worship The One True Cage</title>
 </head>
+
 <body>
-    <div class="page-header text-center">
-      <h1>Worship The One True Cage</h1>
+    
+<div class="container text-center">
+
+    <div class="page-header">
+        <h1>Praise The One True Cage</h1>
+    </div>   
+    
+    <div class="row">
+        <div class="col-xs-4">
+          <div id="wag" class="thumbnail ">Hail to Cage</div>
+          <button class="btn btn-success" id="servoSweep">May the Cage be with you</button>
+          <button class="btn btn-danger" id="servoStop">And also with you</button>
+        </div>
+
+        <div class="col-xs-4">
+            <div id="stream" onclick="startButton(event);">
+                <img src="./images/nickcagemask.png" id=""/>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+          <div id="speak" class="thumbnail ">Speak to us</div>
+          <button class="btn btn-success" id="ledBlink">What is the Answer?</button>
+          <button class="btn btn-danger" id="ledStop">What is the Question?</button>
+        </div>
     </div>
-
-
-        <div id="stream" class="col-xs-4"></div>
-
-
-
-        <div class="col-xs-4">
-          <div id="wag" class="thumbnail"> Hail to Cage </div>
-          <button class="btn btn-success" id="servoSweep">Wag your servo</button>
-          <button class="btn btn-danger" id="servoStop">Stay..</button>
+    
+    <div class="row">
+        <div>
+        <h1 id="listening"></h1>
         </div>
-
-
-
-        <div class="col-xs-4">
-          <div id="speak" class="thumbnail">Set Votives</div>
-          <button class="btn btn-success" id="ledBlink">Speak!</button>
-          <button class="btn btn-danger" id="ledStop">Sssshhhh...</button>
-        </div>
-
-
-
-
+    </div>
+    
+</div>
 
   <script src="./bower_components/socket.io-client/socket.io.js"></script>
   <script src="./bower_components/jquery/dist/jquery.min.js"></script>
   <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-    var alive = false;
-    var socket = io.connect('/');
+
+var alive = false;
+var socket = io.connect('/');
 
 
-    socket.on('connect', function(data) {
-      socket.emit('join');
-    });
+socket.on('connect', function(data) {
+  socket.emit('join');
+});
 
-    socket.on('push', function(data){
-      $('#stream').css({"background-color": "rgb(" + data + "," + 0 + "," + 0 + ")" });
-      if(data > 100) {
-        alive = true;
-        $(':button').attr('disabled', false)
-        } else {
-          alive = false;
-          $(':button').attr('disabled', true);
-          socket.emit('led:off');
-          socket.emit('servo:stop');
-          $('#speak').html('');
-          $('#wag').html('');
-        };
-    });
-
-    $('#ledBlink').on('click', function(){
-      console.log('start led blink');
-      socket.emit('led:blink');
-      $('#speak').html('<img src="./images/nicspeak.gif">');
-    });
-
-    $('#ledStop').on('click', function(){
-      console.log('stop led blink');
+socket.on('push', function(data){
+  $('#stream').css({"background": "radial-gradient(ellipse at center, rgba(255, 221,50," + data + ") 30%, rgba(125, 185, 232, 0) 70%)"});
+  if(data > .2) {
+    alive = true; 
+    $(':button').attr('disabled', false)
+    } else {
+      alive = false;    
+      $(':button').attr('disabled', true);
       socket.emit('led:off');
-      $('#speak').html('');
-    });
-
-    $('#servoSweep').on('click', function(){
-      console.log('start servo sweep');
-      socket.emit('servo:sweep');
-      $('#wag').html('<img src="./images/nicwag.gif">')
-    });
-
-    $('#servoStop').on('click', function(){
-      console.log('stop servo sweep');
       socket.emit('servo:stop');
-      $('#wag').html('');
-    });
+      $('#speak').html('The Answer');
+      $('#wag').html('Hail to Cage');
+    };
+});
 
+$('#ledBlink').on('click', function(){
+  console.log('start led blink');
+  socket.emit('led:blink');
+  $('#speak').html('<img src="./images/cagehair.gif">');
+});
+
+$('#ledStop').on('click', function(){
+  console.log('stop led blink');
+  socket.emit('led:off');
+  $('#speak').html('The Answer');
+});
+
+$('#servoSweep').on('click', function(){
+  console.log('start servo sweep');
+  socket.emit('servo:sweep');
+  $('#wag').html('<img src="./images/nicwag.gif">')
+});
+
+$('#servoStop').on('click', function(){
+  console.log('stop servo sweep');
+  socket.emit('servo:stop');
+  $('#wag').html('Hail to Cage');
+});
+
+    
+if (!('webkitSpeechRecognition' in window)) {
+    alert('Speech API not supported here…');
+} else { //Let’s do some cool stuff :)
+    var recognition = new webkitSpeechRecognition(); //That is the object that will manage our whole recognition process. 
+    recognition.continuous = true;   //Suitable for dictation. 
+    recognition.interimResults = true;  //If we want to start receiving results even if they are not final.
+    //Define some more additional parameters for the recognition:
+    recognition.lang = "en-US"; 
+    recognition.maxAlternatives = 1; //Since from our experience, the highest result is really the best...
+};
+    
+
+recognition.onstart = function() {
+    $('#listening').html('Cage is Listening...')
+};
+
+recognition.onend = function() {
+    //$('#listening').html('')
+};
+
+recognition.onresult = function(event) { //the event holds the results
+//Yay – we have results! Let’s check if they are defined and if final or not:
+    if (typeof(event.results) === 'undefined') { //Something is wrong…
+        recognition.stop();
+        return;
+    }
+
+    for (var i = event.resultIndex; i < event.results.length; ++i) {      
+        if (event.results[i].isFinal) { //Final results
+            console.log("final results: " + event.results[i][0].transcript);   //Of course – here is the place to do useful things with the results.
+            var results = event.results[i][0].transcript;
+            
+            switch (results) {
+              case "wave":
+                console.log("I heard wave");
+                console.log('start servo sweep');
+                socket.emit('servo:sweep');
+                $('#wag').html('<img src="./images/nicwag.gif">');
+                $('#listening').html('');
+                break;
+              case "speak to us":
+                console.log("I heard speak to us");
+                console.log('start led blink');
+                socket.emit('led:blink');
+                $('#speak').html('<img src="./images/cagehair.gif">');
+                $('#listening').html('');    
+                break;
+              default:
+                $('#listening').html("Sorry, I don't understand \"" + results + "\".");
+                console.log("Sorry, I don't understand" + results + ".");
+            };
+            recognition.stop();
+        } else {   //i.e. interim...
+        console.log("interim results: " + event.results[i][0].transcript);  //You can use these results to give the user near real time experience.
+    } 
+} //end for loop
+}; 
+    
+function startButton(event) {
+    recognition.start();
+    //start_img.src = 'https://speechlogger.appspot.com/images/micslash2.png'; //We change the image to a slashed until the user approves the browser to listen and recognition actually starts. Then – we’ll change the image to ‘mic on’.
+};    
 </script>
 </body>
 </html>

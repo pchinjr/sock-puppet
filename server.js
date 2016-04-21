@@ -63,8 +63,8 @@ io.on('connection', function (socket) {
             console.log('SERVO STOP RECEIVED');
         });
 
-        photoresistor.scale(0,255).on('data', function() {
-          socket.emit('push', Math.round(this.value));
+        photoresistor.scale(0,1).on('data', function() {
+          socket.emit('push', this.value);
         });
 
         socket.on('disconnect', function() {
