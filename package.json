@@ -1,6 +1,6 @@
 {
   "name": "sock-puppet",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Controlling Nodebots with SocketIO",
   "main": "server.js",
   "dependencies": {
@@ -22,7 +22,8 @@
   },
   "keywords": [
     "nodebot",
-    "socketio"
+    "socketio",
+    "web speech api"  
   ],
   "author": "Paul Chin Jr.",
   "license": "MIT",

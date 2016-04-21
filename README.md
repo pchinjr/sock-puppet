@@ -13,4 +13,7 @@ To get it running 'npm install', and then 'node server.js'
 
 One thing to keep in mind right now is to make sure that your browser is not trying to connect to localhost:3000 when you start the server.
 
-This uses an arduino, a photoresistor, a servo, and an led.
+This uses an arduino, a photoresistor, a servo, and an led
+
+04/21/16 - UPDATE: 
+I added voice recognition using web speech api to issue commands in addition to button clicks. 
