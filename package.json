@@ -7,6 +7,7 @@
     "bower": "^1.7.7",
     "express": "^4.13.4",
     "johnny-five": "^0.9.21",
+    "serialport": "^3.1.2",
     "socket.io": "^1.4.5",
     "temporal": "^0.5.0"
   },
@@ -23,7 +24,7 @@
   "keywords": [
     "nodebot",
     "socketio",
-    "web speech api"  
+    "web speech api"
   ],
   "author": "Paul Chin Jr.",
   "license": "MIT",
