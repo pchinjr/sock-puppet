@@ -6,6 +6,18 @@ var five = require("johnny-five");
 var io = require('socket.io')(server);
 var port = 3000;
 
+
+//Open Socket Connection to Digital Ocean server
+var io2 = require('socket.io-client');
+var socket2 = io2.connect('http://45.55.86.193:3000/');
+
+socket2.on('connect', function(data) {
+        socket2.emit('join');
+        socket2.emit('clientconnect', {message: 'hello'});
+        console.log('connected to DO server')
+});
+
+
 //create the node server and serve the files
 app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
