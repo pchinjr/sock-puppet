@@ -37,7 +37,7 @@ var socket2 = io2.connect('http://45.55.86.193:3000/');
 socket2.on('connect', function(socket) {
         socket2.emit('cage-pi-connect', {message: 'connection established from cage'});
         socket2.on('servo:set', function () {
-            servo.to(90);
+            servo.to(180);
             console.log('SERVO SET TO 90 RECEIVED');
         });
 });
