@@ -28,7 +28,7 @@ board.on("ready", function() {
       freq: 25
     });
     console.log('Arduino connected');
-});
+
 
 //Open Socket Connection to Digital Ocean server
 var io2 = require('socket.io-client');
@@ -40,6 +40,10 @@ socket2.on('connect', function(socket) {
             servo.to(data);
             console.log('SERVO SET TO..' + data);
         });
+        socket2.on('led:cage', function() {
+			led.blink(1000);
+			console.log('worshiper found cage');
+		});
 });
 
 //SocketIO connection handler and listening
@@ -76,13 +80,15 @@ io.on('connection', function (socket) {
         });
 
         photoresistor.scale(0,1).on('data', function() {
-          socket.emit('push', this.value);
+			socket.emit('push', this.value);
         });
 
         socket.on('disconnect', function() {
           console.log('browser closed');
         })
     });
+    
+});
     
 //if nothing else is happened yet.
 console.log('Waiting for arduino connection..');
